@@ -19,26 +19,38 @@ and Transaction Date.
 Microsoft Excel — Tables, COUNTIF, SUMPRODUCT, COUNTA formulas.
 
 ## Process
+1## Process
 1. Loaded raw data into a structured Excel Table for safe, name-based referencing
-2. Built 12 automated diagnostic checks: duplicate detection, per-column 
-   Unknown/Error counts across all 7 columns, and a multi-field broken-row 
-   breakdown (0 / 1 / 2+ broken fields per row)
-3. Cross-verified formulas independently (confirmed the 0/1/2+ tiers summed 
-   correctly to 10,000 rows)
-4. Logged findings and translated results into a client-facing report with 
+2. Built a Diagnostics sheet with automated checks: duplicate IDs, per-column 
+   Unknown/Error counts, and a per-row Broken Field Count (0 / 1 / 2+ broken fields)
+3. Handled missing data: filled categorical blanks (Item, Payment Method, Location) 
+   with "Unspecified" labels; flagged unreliable Transaction Date entries instead 
+   of guessing values
+4. Standardized text consistency (capitalization, spacing) across Location and 
+   Payment Method using PROPER/TRIM, with before/after verification
+5. Built a 7-condition COUNTIFS check to detect full-row duplicates (excluding 
+   Transaction ID) for manual review
+6. Discovered and fixed a dataset-wide issue: Transaction Date was stored as text, 
+   not real dates — converted using VALUE(), preserving readable labels for 
+   unrecoverable entries
+7. Added Data Validation dropdowns to prevent future inconsistent entries
+8. Logged findings and translated results into a client-facing report with 
    prioritized, actionable recommendations
-
+9. Audited the full workbook for consistency, catching and correcting a 
+   pre-existing total error from the original report
 ## Screenshots
 
 ![Diagnostics overview](images/diagnostics-overview.png)
 ![Client report](images/report-overview.png)
 
 ## Key Findings
-- 71.55% of rows are fully clean; 24.67% have one minor issue; 3.78% (378 rows) 
+-## Key Findings
+- 70.38% of rows are fully clean; 25.47% have one minor issue; 4.15% (415 rows) 
   are high-risk with 2+ broken fields and should be excluded from analysis
+- 363 rows match exactly across all 7 non-ID columns — flagged for manual review 
+  as possible duplicates or coincidental overlap
 - Zero duplicate transaction IDs — revenue totals are not inflated
-- Total Spent, Quantity, and Price Per Unit (the revenue-relevant columns) each 
-  have roughly 3% Unknown/Error entries
-
+- Transaction Date entries were originally stored as text; all were converted to 
+  real, sortable dates
 ## Author
 Reagan — Civil Engineering student, JKUAT, building a data analytics portfolio
