@@ -19,7 +19,6 @@ and Transaction Date.
 Microsoft Excel — Tables, COUNTIF, SUMPRODUCT, COUNTA formulas.
 
 ## Process
- Process
 1. Loaded raw data into a structured Excel Table for safe, name-based referencing
 2. Built a Diagnostics sheet with automated checks: duplicate IDs, per-column 
    Unknown/Error counts, and a per-row Broken Field Count (0 / 1 / 2+ broken fields)
@@ -44,7 +43,6 @@ Microsoft Excel — Tables, COUNTIF, SUMPRODUCT, COUNTA formulas.
 ![Client report](images/report-overview.png)
 
 ## Key Findings
-Key Findings
 - 70.38% of rows are fully clean; 25.47% have one minor issue; 4.15% (415 rows) 
   are high-risk with 2+ broken fields and should be excluded from analysis
 - 363 rows match exactly across all 7 non-ID columns — flagged for manual review 
